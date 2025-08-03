@@ -12,10 +12,15 @@ import {
   Lightbulb,
   Globe,
   Rocket,
-  MessageCircle
+  MessageCircle,
+  Menu,
+  X
 } from 'lucide-react';
+import { useState } from 'react';
 
 export default function About() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   const team = [
     {
       name: "지종현",
@@ -106,6 +111,8 @@ export default function About() {
                 <span className="ml-2 text-xl font-bold text-gray-900">Studymate</span>
               </Link>
             </div>
+            
+            {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
               <Link href="/#features" className="text-gray-600 hover:text-blue-600 transition-colors duration-300">
                 기능
@@ -123,7 +130,9 @@ export default function About() {
                 문의
               </Link>
             </div>
-            <div className="flex items-center space-x-4">
+            
+            {/* Desktop Buttons */}
+            <div className="hidden md:flex items-center space-x-4">
               <motion.button 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -139,7 +148,86 @@ export default function About() {
                 무료 체험
               </motion.button>
             </div>
+            
+            {/* Mobile Menu Button */}
+            <div className="md:hidden">
+              <motion.button
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                aria-label="메뉴 열기"
+              >
+                {isMobileMenuOpen ? (
+                  <X className="w-6 h-6 text-gray-700" />
+                ) : (
+                  <Menu className="w-6 h-6 text-gray-700" />
+                )}
+              </motion.button>
+            </div>
           </div>
+          
+          {/* Mobile Navigation Menu */}
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ 
+              opacity: isMobileMenuOpen ? 1 : 0,
+              height: isMobileMenuOpen ? "auto" : 0
+            }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden overflow-hidden bg-white border-t border-gray-200"
+          >
+            <div className="py-4 space-y-2">
+              <Link 
+                href="/#features" 
+                className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-colors rounded-lg mx-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                기능
+              </Link>
+              <Link 
+                href="/#benefits" 
+                className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-colors rounded-lg mx-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                장점
+              </Link>
+              <Link 
+                href="/#pricing" 
+                className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-colors rounded-lg mx-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                가격
+              </Link>
+              <Link 
+                href="/about" 
+                className="block px-4 py-3 text-blue-600 font-semibold hover:bg-blue-50 transition-colors rounded-lg mx-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                소개
+              </Link>
+              <Link 
+                href="/contact" 
+                className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-colors rounded-lg mx-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                문의
+              </Link>
+              <div className="px-4 py-3 space-y-2">
+                <motion.button 
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full px-4 py-3 text-blue-600 hover:text-blue-700 transition-colors text-left"
+                >
+                  로그인
+                </motion.button>
+                <motion.button 
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-lg"
+                >
+                  무료 체험
+                </motion.button>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </nav>
 
@@ -151,16 +239,16 @@ export default function About() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight"
             >
               교육 혁신을 이끄는
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600"> Studymate</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 block sm:inline"> Studymate</span>
             </motion.h1>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto"
+              className="text-lg sm:text-xl text-gray-600 mb-6 sm:mb-8 max-w-3xl mx-auto px-4 leading-relaxed"
             >
               AI 기술과 인간의 따뜻함을 결합하여 모든 학생이 자신의 꿈을 이룰 수 있도록 돕습니다
             </motion.p>

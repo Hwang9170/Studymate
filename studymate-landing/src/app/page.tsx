@@ -16,11 +16,14 @@ import {
   Smartphone,
   Zap,
   Heart,
-  Sparkles
+  Sparkles,
+  Menu,
+  X
 } from 'lucide-react';
 
 export default function Home() {
   const [hoveredFeature, setHoveredFeature] = useState<number | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const features = [
     {
@@ -105,14 +108,18 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-              <motion.div
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <Brain className="w-8 h-8 text-blue-600" />
-              </motion.div>
-              <span className="ml-2 text-xl font-bold text-gray-900">Studymate</span>
+              <Link href="/" className="flex items-center">
+                <motion.div
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <Brain className="w-8 h-8 text-blue-600" />
+                </motion.div>
+                <span className="ml-2 text-xl font-bold text-gray-900">Studymate</span>
+              </Link>
             </div>
+            
+            {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
               <Link href="#features" className="text-gray-600 hover:text-blue-600 transition-colors duration-300 hover:scale-105">
                 기능
@@ -130,7 +137,9 @@ export default function Home() {
                 문의
               </Link>
             </div>
-            <div className="flex items-center space-x-4">
+            
+            {/* Desktop Buttons */}
+            <div className="hidden md:flex items-center space-x-4">
               <motion.button 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -146,7 +155,86 @@ export default function Home() {
                 무료 체험
               </motion.button>
             </div>
+            
+            {/* Mobile Menu Button */}
+            <div className="md:hidden">
+              <motion.button
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                aria-label="메뉴 열기"
+              >
+                {isMobileMenuOpen ? (
+                  <X className="w-6 h-6 text-gray-700" />
+                ) : (
+                  <Menu className="w-6 h-6 text-gray-700" />
+                )}
+              </motion.button>
+            </div>
           </div>
+          
+          {/* Mobile Navigation Menu */}
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ 
+              opacity: isMobileMenuOpen ? 1 : 0,
+              height: isMobileMenuOpen ? "auto" : 0
+            }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden overflow-hidden bg-white border-t border-gray-200"
+          >
+            <div className="py-4 space-y-2">
+              <Link 
+                href="#features" 
+                className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-colors rounded-lg mx-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                기능
+              </Link>
+              <Link 
+                href="#benefits" 
+                className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-colors rounded-lg mx-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                장점
+              </Link>
+              <Link 
+                href="#pricing" 
+                className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-colors rounded-lg mx-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                가격
+              </Link>
+              <Link 
+                href="/about" 
+                className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-colors rounded-lg mx-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                소개
+              </Link>
+              <Link 
+                href="/contact" 
+                className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-colors rounded-lg mx-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                문의
+              </Link>
+              <div className="px-4 py-3 space-y-2">
+                <motion.button 
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full px-4 py-3 text-blue-600 hover:text-blue-700 transition-colors text-left"
+                >
+                  로그인
+                </motion.button>
+                <motion.button 
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-lg"
+                >
+                  무료 체험
+                </motion.button>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </nav>
 
@@ -158,16 +246,16 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight"
             >
               나만의 AI 학습 코치,
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Studymate</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 block sm:inline">Studymate</span>
             </motion.h1>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto"
+              className="text-lg sm:text-xl text-gray-600 mb-6 sm:mb-8 max-w-3xl mx-auto px-4 leading-relaxed"
             >
               학생의 학습 데이터를 트래킹하여 AI가 개인 맞춤형 학습 시간표를 제안하고 
               과목별 학습 방향성을 제시하는 학습 관리 모바일 애플리케이션
@@ -176,12 +264,12 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4"
             >
               <motion.button 
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 text-lg font-semibold flex items-center shadow-lg hover:shadow-xl"
+                className="w-full sm:w-auto px-6 sm:px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 text-base sm:text-lg font-semibold flex items-center justify-center shadow-lg hover:shadow-xl min-h-[48px]"
               >
                 <Smartphone className="w-5 h-5 mr-2" />
                 앱 다운로드
@@ -189,7 +277,7 @@ export default function Home() {
               <motion.button 
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 hover:border-blue-300 transition-all duration-300 text-lg font-semibold flex items-center shadow-lg hover:shadow-xl"
+                className="w-full sm:w-auto px-6 sm:px-8 py-4 border-2 border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 hover:border-blue-300 transition-all duration-300 text-base sm:text-lg font-semibold flex items-center justify-center shadow-lg hover:shadow-xl min-h-[48px]"
               >
                 <Play className="w-5 h-5 mr-2" />
                 데모 보기
@@ -202,7 +290,7 @@ export default function Home() {
       {/* Stats Section */}
       <section className="py-12 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {stats.map((stat, index) => (
               <motion.div
                 key={index}
@@ -210,13 +298,13 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ scale: 1.05, y: -5 }}
-                className="text-center p-6 rounded-xl bg-gradient-to-br from-blue-50 to-purple-50 hover:shadow-lg transition-all duration-300"
+                className="text-center p-4 sm:p-6 rounded-xl bg-gradient-to-br from-blue-50 to-purple-50 hover:shadow-lg transition-all duration-300"
               >
-                <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mx-auto mb-4 text-white">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mx-auto mb-3 sm:mb-4 text-white">
                   {stat.icon}
                 </div>
-                <div className="text-3xl font-bold text-gray-900 mb-2">{stat.number}</div>
-                <div className="text-gray-600">{stat.label}</div>
+                <div className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1 sm:mb-2">{stat.number}</div>
+                <div className="text-sm sm:text-base text-gray-600">{stat.label}</div>
               </motion.div>
             ))}
           </div>
@@ -226,15 +314,15 @@ export default function Home() {
       {/* Features Section */}
       <section id="features" className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
               AI 기반 개인 맞춤형 학습 관리
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto px-4">
               계획부터 실행, 분석까지 모든 과정을 AI가 함께합니다
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {features.map((feature, index) => (
               <motion.div
                 key={index}
@@ -242,16 +330,16 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ 
-                  scale: 1.05, 
-                  y: -10,
+                  scale: 1.02, 
+                  y: -5,
                   transition: { duration: 0.3 }
                 }}
                 onHoverStart={() => setHoveredFeature(index)}
                 onHoverEnd={() => setHoveredFeature(null)}
-                className="text-center p-6 rounded-xl bg-white hover:shadow-2xl transition-all duration-300 cursor-pointer border border-gray-100"
+                className="text-center p-4 sm:p-6 rounded-xl bg-white hover:shadow-xl transition-all duration-300 cursor-pointer border border-gray-100"
               >
                 <motion.div 
-                  className={`w-16 h-16 bg-gradient-to-r ${feature.color} rounded-xl flex items-center justify-center mx-auto mb-4 text-white shadow-lg`}
+                  className={`w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r ${feature.color} rounded-xl flex items-center justify-center mx-auto mb-3 sm:mb-4 text-white shadow-lg`}
                   animate={{
                     scale: hoveredFeature === index ? 1.1 : 1,
                     rotate: hoveredFeature === index ? 5 : 0
@@ -260,10 +348,10 @@ export default function Home() {
                 >
                   {feature.icon}
                 </motion.div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 mb-4">
+                <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">
                   {feature.description}
                 </p>
                 <motion.div
@@ -275,10 +363,10 @@ export default function Home() {
                   transition={{ duration: 0.3 }}
                   className="overflow-hidden"
                 >
-                  <ul className="text-sm text-gray-500 space-y-1">
+                  <ul className="text-xs sm:text-sm text-gray-500 space-y-1">
                     {feature.details.map((detail, idx) => (
-                      <li key={idx} className="flex items-center">
-                        <CheckCircle className="w-3 h-3 text-green-500 mr-2 flex-shrink-0" />
+                      <li key={idx} className="flex items-start">
+                        <CheckCircle className="w-3 h-3 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
                         {detail}
                       </li>
                     ))}
@@ -293,15 +381,15 @@ export default function Home() {
       {/* Benefits Section */}
       <section id="benefits" className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
               왜 Studymate인가요?
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto px-4">
               기존 학습 앱과는 다른 차별화된 경험을 제공합니다
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {benefits.map((benefit, index) => (
               <motion.div
                 key={index}
@@ -309,10 +397,10 @@ export default function Home() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ scale: 1.02, x: 5 }}
-                className="flex items-start space-x-4 p-6 rounded-xl hover:bg-gray-50 transition-all duration-300"
+                className="flex items-start space-x-3 sm:space-x-4 p-4 sm:p-6 rounded-xl hover:bg-gray-50 transition-all duration-300"
               >
                 <motion.div 
-                  className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center text-white flex-shrink-0 shadow-lg"
+                  className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center text-white flex-shrink-0 shadow-lg"
                   whileHover={{ rotate: 360 }}
                   transition={{ duration: 0.6 }}
                 >
@@ -320,12 +408,12 @@ export default function Home() {
                 </motion.div>
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-lg font-semibold text-gray-900">
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-900">
                       {benefit.title}
                     </h3>
-                    <span className="text-2xl font-bold text-blue-600">{benefit.stat}</span>
+                    <span className="text-xl sm:text-2xl font-bold text-blue-600">{benefit.stat}</span>
                   </div>
-                  <p className="text-gray-600">
+                  <p className="text-sm sm:text-base text-gray-600">
                     {benefit.description}
                   </p>
                 </div>
@@ -338,27 +426,27 @@ export default function Home() {
       {/* Pricing Section */}
       <section id="pricing" className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
               합리적인 가격으로 시작하세요
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto px-4">
               학생과 학부모 모두를 위한 맞춤형 플랜을 제공합니다
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               whileHover={{ scale: 1.02, y: -5 }}
-              className="p-8 border border-gray-200 rounded-xl hover:shadow-xl transition-all duration-300 bg-white"
+              className="p-6 sm:p-8 border border-gray-200 rounded-xl hover:shadow-xl transition-all duration-300 bg-white"
             >
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">학생형</h3>
-              <div className="text-4xl font-bold text-blue-600 mb-6">
-                ₩49,000<span className="text-lg text-gray-500">/월</span>
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">학생형</h3>
+              <div className="text-3xl sm:text-4xl font-bold text-blue-600 mb-4 sm:mb-6">
+                ₩49,000<span className="text-base sm:text-lg text-gray-500">/월</span>
               </div>
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-2 sm:space-y-3 mb-6 sm:mb-8">
                 <li className="flex items-center">
                   <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
                   AI 분석 기반 주간 리포트
@@ -379,7 +467,7 @@ export default function Home() {
               <motion.button 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl"
+                className="w-full py-3 sm:py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl font-semibold min-h-[48px]"
               >
                 시작하기
               </motion.button>
@@ -389,18 +477,18 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
               whileHover={{ scale: 1.02, y: -5 }}
-              className="p-8 border-2 border-blue-600 rounded-xl bg-gradient-to-br from-blue-50 to-purple-50 hover:shadow-xl transition-all duration-300 relative"
+              className="p-6 sm:p-8 border-2 border-blue-600 rounded-xl bg-gradient-to-br from-blue-50 to-purple-50 hover:shadow-xl transition-all duration-300 relative"
             >
               <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                <span className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-lg">
+                <span className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 sm:px-4 py-1 rounded-full text-xs sm:text-sm font-semibold shadow-lg">
                   인기
                 </span>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">학부모형</h3>
-              <div className="text-4xl font-bold text-blue-600 mb-6">
-                ₩79,000<span className="text-lg text-gray-500">/월</span>
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">학부모형</h3>
+              <div className="text-3xl sm:text-4xl font-bold text-blue-600 mb-4 sm:mb-6">
+                ₩79,000<span className="text-base sm:text-lg text-gray-500">/월</span>
               </div>
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-2 sm:space-y-3 mb-6 sm:mb-8">
                 <li className="flex items-center">
                   <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
                   학생형 모든 기능 포함
@@ -433,15 +521,15 @@ export default function Home() {
       {/* Testimonials Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
               사용자들의 생생한 후기
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto px-4">
               Studymate와 함께한 학생들과 학부모님들의 이야기를 들어보세요
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
             {testimonials.map((testimonial, index) => (
               <motion.div
                 key={index}
@@ -449,29 +537,29 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ scale: 1.02, y: -5 }}
-                className="bg-gradient-to-br from-gray-50 to-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
+                className="bg-gradient-to-br from-gray-50 to-white p-4 sm:p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
               >
-                <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center justify-between mb-3 sm:mb-4">
                   <div className="flex items-center">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                      <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-current" />
                     ))}
                   </div>
-                  <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">
+                  <span className="bg-green-100 text-green-800 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold">
                     {testimonial.improvement}
                   </span>
                 </div>
-                <p className="text-gray-600 mb-4 italic">&ldquo;{testimonial.content}&rdquo;</p>
+                <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4 italic leading-relaxed">&ldquo;{testimonial.content}&rdquo;</p>
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="font-semibold text-gray-900">{testimonial.name}</p>
-                    <p className="text-sm text-gray-500">{testimonial.role}</p>
+                    <p className="text-sm sm:text-base font-semibold text-gray-900">{testimonial.name}</p>
+                    <p className="text-xs sm:text-sm text-gray-500">{testimonial.role}</p>
                   </div>
                   <motion.div
                     whileHover={{ scale: 1.1 }}
-                    className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white"
+                    className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white"
                   >
-                    <Heart className="w-5 h-5" />
+                    <Heart className="w-4 h-4 sm:w-5 sm:h-5" />
                   </motion.div>
                 </div>
               </motion.div>
@@ -487,7 +575,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-3xl font-bold text-white mb-4"
+            className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4"
           >
             지금 바로 시작하세요
           </motion.h2>
@@ -495,7 +583,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl text-blue-100 mb-8"
+            className="text-lg sm:text-xl text-blue-100 mb-6 sm:mb-8 px-4"
           >
             AI 학습 코치와 함께 목표 성적 달성의 꿈을 현실로 만들어보세요
           </motion.p>
@@ -503,12 +591,12 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4"
           >
             <motion.button 
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-white text-blue-600 rounded-lg hover:bg-gray-100 transition-all duration-300 text-lg font-semibold flex items-center justify-center shadow-lg hover:shadow-xl"
+              className="w-full sm:w-auto px-6 sm:px-8 py-4 bg-white text-blue-600 rounded-xl hover:bg-gray-100 transition-all duration-300 text-base sm:text-lg font-semibold flex items-center justify-center shadow-lg hover:shadow-xl min-h-[48px]"
             >
               <Zap className="w-5 h-5 mr-2" />
               무료 체험 시작
@@ -516,7 +604,7 @@ export default function Home() {
             <motion.button 
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 border-2 border-white text-white rounded-lg hover:bg-white hover:text-blue-600 transition-all duration-300 text-lg font-semibold flex items-center justify-center shadow-lg hover:shadow-xl"
+              className="w-full sm:w-auto px-6 sm:px-8 py-4 border-2 border-white text-white rounded-xl hover:bg-white hover:text-blue-600 transition-all duration-300 text-base sm:text-lg font-semibold flex items-center justify-center shadow-lg hover:shadow-xl min-h-[48px]"
             >
               <ArrowRight className="w-5 h-5 mr-2" />
               자세히 알아보기
@@ -528,8 +616,8 @@ export default function Home() {
       {/* Footer */}
       <footer id="contact" className="bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
+            <div className="col-span-2 sm:col-span-1">
               <div className="flex items-center mb-4">
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
@@ -539,13 +627,13 @@ export default function Home() {
                 </motion.div>
                 <span className="ml-2 text-xl font-bold">Studymate</span>
               </div>
-              <p className="text-gray-400">
+              <p className="text-sm sm:text-base text-gray-400">
                 나만의 AI 학습 코치와 함께하는 스마트한 학습 관리
               </p>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-4">서비스</h3>
-              <ul className="space-y-2 text-gray-400">
+              <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">서비스</h3>
+              <ul className="space-y-1 sm:space-y-2 text-sm sm:text-base text-gray-400">
                 <li><Link href="#" className="hover:text-white transition-colors duration-300">AI 학습 분석</Link></li>
                 <li><Link href="#" className="hover:text-white transition-colors duration-300">멘토 매칭</Link></li>
                 <li><Link href="#" className="hover:text-white transition-colors duration-300">학습 관리</Link></li>
@@ -553,8 +641,8 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-4">회사</h3>
-              <ul className="space-y-2 text-gray-400">
+              <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">회사</h3>
+              <ul className="space-y-1 sm:space-y-2 text-sm sm:text-base text-gray-400">
                 <li><Link href="/about" className="hover:text-white transition-colors duration-300">소개</Link></li>
                 <li><Link href="/team" className="hover:text-white transition-colors duration-300">팀</Link></li>
                 <li><Link href="/careers" className="hover:text-white transition-colors duration-300">채용</Link></li>
@@ -562,8 +650,8 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-4">지원</h3>
-              <ul className="space-y-2 text-gray-400">
+              <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">지원</h3>
+              <ul className="space-y-1 sm:space-y-2 text-sm sm:text-base text-gray-400">
                 <li><Link href="/support" className="hover:text-white transition-colors duration-300">고객센터</Link></li>
                 <li><Link href="/contact" className="hover:text-white transition-colors duration-300">문의하기</Link></li>
                 <li><Link href="/faq" className="hover:text-white transition-colors duration-300">FAQ</Link></li>
@@ -571,8 +659,8 @@ export default function Home() {
               </ul>
             </div>
           </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 Studymate. All rights reserved.</p>
+          <div className="border-t border-gray-800 mt-6 sm:mt-8 pt-6 sm:pt-8 text-center text-gray-400">
+            <p className="text-sm sm:text-base">&copy; 2024 Studymate. All rights reserved.</p>
           </div>
         </div>
       </footer>

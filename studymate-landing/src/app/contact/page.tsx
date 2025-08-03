@@ -14,7 +14,9 @@ import {
   ArrowRight,
   User,
   Mail as MailIcon,
-  MessageSquare
+  MessageSquare,
+  Menu,
+  X
 } from 'lucide-react';
 
 export default function Contact() {
@@ -26,6 +28,7 @@ export default function Contact() {
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -98,6 +101,8 @@ export default function Contact() {
                 <span className="ml-2 text-xl font-bold text-gray-900">Studymate</span>
               </Link>
             </div>
+            
+            {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
               <Link href="/#features" className="text-gray-600 hover:text-blue-600 transition-colors duration-300">
                 기능
@@ -115,7 +120,9 @@ export default function Contact() {
                 문의
               </Link>
             </div>
-            <div className="flex items-center space-x-4">
+            
+            {/* Desktop Buttons */}
+            <div className="hidden md:flex items-center space-x-4">
               <motion.button 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -131,7 +138,86 @@ export default function Contact() {
                 무료 체험
               </motion.button>
             </div>
+            
+            {/* Mobile Menu Button */}
+            <div className="md:hidden">
+              <motion.button
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                aria-label="메뉴 열기"
+              >
+                {isMobileMenuOpen ? (
+                  <X className="w-6 h-6 text-gray-700" />
+                ) : (
+                  <Menu className="w-6 h-6 text-gray-700" />
+                )}
+              </motion.button>
+            </div>
           </div>
+          
+          {/* Mobile Navigation Menu */}
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ 
+              opacity: isMobileMenuOpen ? 1 : 0,
+              height: isMobileMenuOpen ? "auto" : 0
+            }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden overflow-hidden bg-white border-t border-gray-200"
+          >
+            <div className="py-4 space-y-2">
+              <Link 
+                href="/#features" 
+                className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-colors rounded-lg mx-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                기능
+              </Link>
+              <Link 
+                href="/#benefits" 
+                className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-colors rounded-lg mx-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                장점
+              </Link>
+              <Link 
+                href="/#pricing" 
+                className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-colors rounded-lg mx-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                가격
+              </Link>
+              <Link 
+                href="/about" 
+                className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-colors rounded-lg mx-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                소개
+              </Link>
+              <Link 
+                href="/contact" 
+                className="block px-4 py-3 text-blue-600 font-semibold hover:bg-blue-50 transition-colors rounded-lg mx-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                문의
+              </Link>
+              <div className="px-4 py-3 space-y-2">
+                <motion.button 
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full px-4 py-3 text-blue-600 hover:text-blue-700 transition-colors text-left"
+                >
+                  로그인
+                </motion.button>
+                <motion.button 
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-lg"
+                >
+                  무료 체험
+                </motion.button>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </nav>
 
@@ -143,7 +229,7 @@ export default function Contact() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight"
             >
               문의하기
             </motion.h1>
@@ -151,7 +237,7 @@ export default function Contact() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto"
+              className="text-lg sm:text-xl text-gray-600 mb-6 sm:mb-8 max-w-3xl mx-auto px-4 leading-relaxed"
             >
               궁금한 점이 있으시거나 서비스에 대한 문의사항이 있으시면 언제든 연락주세요
             </motion.p>
@@ -162,7 +248,7 @@ export default function Contact() {
       {/* Contact Info Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
             {contactInfo.map((info, index) => (
               <motion.div
                 key={index}
@@ -170,18 +256,18 @@ export default function Contact() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ scale: 1.02, y: -5 }}
-                className="text-center p-6 rounded-xl bg-gradient-to-br from-blue-50 to-purple-50 hover:shadow-lg transition-all duration-300"
+                className="text-center p-4 sm:p-6 rounded-xl bg-gradient-to-br from-blue-50 to-purple-50 hover:shadow-lg transition-all duration-300"
               >
-                <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mx-auto mb-4 text-white">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mx-auto mb-3 sm:mb-4 text-white">
                   {info.icon}
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2">
                   {info.title}
                 </h3>
-                <p className="text-blue-600 font-medium mb-1">
+                <p className="text-blue-600 font-medium mb-1 text-sm sm:text-base">
                   {info.content}
                 </p>
-                <p className="text-gray-600 text-sm">
+                <p className="text-gray-600 text-xs sm:text-sm">
                   {info.description}
                 </p>
               </motion.div>
@@ -193,11 +279,11 @@ export default function Contact() {
       {/* Contact Form Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
               문의하기
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-lg sm:text-xl text-gray-600 px-4">
               아래 폼을 작성해주시면 빠른 시일 내에 답변드리겠습니다
             </p>
           </div>
@@ -222,7 +308,7 @@ export default function Contact() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               onSubmit={handleSubmit}
-              className="bg-white rounded-xl shadow-lg p-8"
+              className="bg-white rounded-xl shadow-lg p-6 sm:p-8"
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div>
@@ -307,7 +393,7 @@ export default function Contact() {
                 type="submit"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-6 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 font-semibold flex items-center justify-center shadow-lg hover:shadow-xl"
+                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 sm:py-4 px-6 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 font-semibold flex items-center justify-center shadow-lg hover:shadow-xl min-h-[48px]"
               >
                 <Send className="w-5 h-5 mr-2" />
                 문의하기
@@ -320,11 +406,11 @@ export default function Contact() {
       {/* FAQ Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
               자주 묻는 질문
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-lg sm:text-xl text-gray-600 px-4">
               고객님들이 자주 문의하시는 내용들입니다
             </p>
           </div>
@@ -337,12 +423,12 @@ export default function Contact() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ scale: 1.01 }}
-                className="bg-gray-50 rounded-xl p-6 hover:shadow-lg transition-all duration-300"
+                className="bg-gray-50 rounded-xl p-4 sm:p-6 hover:shadow-lg transition-all duration-300"
               >
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2 sm:mb-3">
                   {faq.question}
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                   {faq.answer}
                 </p>
               </motion.div>
@@ -358,7 +444,7 @@ export default function Contact() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-3xl font-bold text-white mb-4"
+            className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4"
           >
             지금 바로 시작하세요
           </motion.h2>
@@ -366,7 +452,7 @@ export default function Contact() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl text-blue-100 mb-8"
+            className="text-lg sm:text-xl text-blue-100 mb-6 sm:mb-8 px-4"
           >
             AI 학습 코치와 함께 목표 성적 달성의 꿈을 현실로 만들어보세요
           </motion.p>
@@ -374,12 +460,12 @@ export default function Contact() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4"
           >
             <motion.button 
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-white text-blue-600 rounded-lg hover:bg-gray-100 transition-all duration-300 text-lg font-semibold flex items-center justify-center shadow-lg hover:shadow-xl"
+              className="w-full sm:w-auto px-6 sm:px-8 py-4 bg-white text-blue-600 rounded-xl hover:bg-gray-100 transition-all duration-300 text-base sm:text-lg font-semibold flex items-center justify-center shadow-lg hover:shadow-xl min-h-[48px]"
             >
               <MessageCircle className="w-5 h-5 mr-2" />
               무료 체험 시작
@@ -387,7 +473,7 @@ export default function Contact() {
             <motion.button 
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 border-2 border-white text-white rounded-lg hover:bg-white hover:text-blue-600 transition-all duration-300 text-lg font-semibold flex items-center justify-center shadow-lg hover:shadow-xl"
+              className="w-full sm:w-auto px-6 sm:px-8 py-4 border-2 border-white text-white rounded-xl hover:bg-white hover:text-blue-600 transition-all duration-300 text-base sm:text-lg font-semibold flex items-center justify-center shadow-lg hover:shadow-xl min-h-[48px]"
             >
               <ArrowRight className="w-5 h-5 mr-2" />
               홈으로 돌아가기
@@ -399,8 +485,8 @@ export default function Contact() {
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
+            <div className="col-span-2 sm:col-span-1">
               <div className="flex items-center mb-4">
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
@@ -410,13 +496,13 @@ export default function Contact() {
                 </motion.div>
                 <span className="ml-2 text-xl font-bold">Studymate</span>
               </div>
-              <p className="text-gray-400">
+              <p className="text-sm sm:text-base text-gray-400">
                 나만의 AI 학습 코치와 함께하는 스마트한 학습 관리
               </p>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-4">서비스</h3>
-              <ul className="space-y-2 text-gray-400">
+              <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">서비스</h3>
+              <ul className="space-y-1 sm:space-y-2 text-sm sm:text-base text-gray-400">
                 <li><Link href="#" className="hover:text-white transition-colors duration-300">AI 학습 분석</Link></li>
                 <li><Link href="#" className="hover:text-white transition-colors duration-300">멘토 매칭</Link></li>
                 <li><Link href="#" className="hover:text-white transition-colors duration-300">학습 관리</Link></li>
@@ -424,8 +510,8 @@ export default function Contact() {
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-4">회사</h3>
-              <ul className="space-y-2 text-gray-400">
+              <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">회사</h3>
+              <ul className="space-y-1 sm:space-y-2 text-sm sm:text-base text-gray-400">
                 <li><Link href="/about" className="hover:text-white transition-colors duration-300">소개</Link></li>
                 <li><Link href="/team" className="hover:text-white transition-colors duration-300">팀</Link></li>
                 <li><Link href="/careers" className="hover:text-white transition-colors duration-300">채용</Link></li>
@@ -433,8 +519,8 @@ export default function Contact() {
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-4">지원</h3>
-              <ul className="space-y-2 text-gray-400">
+              <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">지원</h3>
+              <ul className="space-y-1 sm:space-y-2 text-sm sm:text-base text-gray-400">
                 <li><Link href="/support" className="hover:text-white transition-colors duration-300">고객센터</Link></li>
                 <li><Link href="/contact" className="text-blue-400 font-semibold">문의하기</Link></li>
                 <li><Link href="/faq" className="hover:text-white transition-colors duration-300">FAQ</Link></li>
@@ -442,8 +528,8 @@ export default function Contact() {
               </ul>
             </div>
           </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 Studymate. All rights reserved.</p>
+          <div className="border-t border-gray-800 mt-6 sm:mt-8 pt-6 sm:pt-8 text-center text-gray-400">
+            <p className="text-sm sm:text-base">&copy; 2024 Studymate. All rights reserved.</p>
           </div>
         </div>
       </footer>
