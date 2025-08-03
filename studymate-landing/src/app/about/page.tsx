@@ -5,28 +5,14 @@ import Link from 'next/link';
 import { 
   Brain, 
   Target, 
-  Users, 
-  BarChart3, 
-  Clock, 
   CheckCircle, 
-  Star,
   ArrowRight,
-  Play,
-  Smartphone,
-  Zap,
-  Shield,
-  ChevronRight,
-  BookOpen,
-  TrendingUp,
-  MessageCircle,
-  Calendar,
-  Award,
   Heart,
-  Sparkles,
   GraduationCap,
   Lightbulb,
   Globe,
-  Rocket
+  Rocket,
+  MessageCircle
 } from 'lucide-react';
 
 export default function About() {

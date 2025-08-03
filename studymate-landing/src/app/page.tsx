@@ -15,19 +15,11 @@ import {
   Play,
   Smartphone,
   Zap,
-  Shield,
-  ChevronRight,
-  BookOpen,
-  TrendingUp,
-  MessageCircle,
-  Calendar,
-  Award,
   Heart,
   Sparkles
 } from 'lucide-react';
 
 export default function Home() {
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [hoveredFeature, setHoveredFeature] = useState<number | null>(null);
 
   const features = [
@@ -102,7 +94,7 @@ export default function Home() {
   const stats = [
     { number: "10,000+", label: "활성 사용자", icon: <Users className="w-6 h-6" /> },
     { number: "95%", label: "만족도", icon: <Heart className="w-6 h-6" /> },
-    { number: "2.3등급", label: "평균 성적 향상", icon: <TrendingUp className="w-6 h-6" /> },
+    { number: "2.3등급", label: "평균 성적 향상", icon: <BarChart3 className="w-6 h-6" /> },
     { number: "24/7", label: "AI 지원", icon: <Sparkles className="w-6 h-6" /> }
   ];
 
@@ -469,7 +461,7 @@ export default function Home() {
                     {testimonial.improvement}
                   </span>
                 </div>
-                <p className="text-gray-600 mb-4 italic">"{testimonial.content}"</p>
+                <p className="text-gray-600 mb-4 italic">&ldquo;{testimonial.content}&rdquo;</p>
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="font-semibold text-gray-900">{testimonial.name}</p>
