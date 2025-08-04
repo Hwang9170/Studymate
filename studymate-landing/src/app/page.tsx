@@ -450,15 +450,15 @@ export default function Home() {
               <ul className="space-y-2 sm:space-y-3 mb-6 sm:mb-8">
                 <li className="flex items-start">
                   <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
+                  <span className="text-sm sm:text-base text-gray-700">기본 학습 관리</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
                   <span className="text-sm sm:text-base text-gray-700">기본 AI 리포트 제공</span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
                   <span className="text-sm sm:text-base text-gray-700">일부 기능 제한</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
-                  <span className="text-sm sm:text-base text-gray-700">기본 학습 관리</span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
@@ -489,11 +489,11 @@ export default function Home() {
               <ul className="space-y-2 sm:space-y-3 mb-6 sm:mb-8">
                 <li className="flex items-start">
                   <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
-                  <span className="text-sm sm:text-base text-gray-700">AI 심층리포트 생성</span>
+                  <span className="text-sm sm:text-base text-gray-700">과목별 학습데이터 정밀 분석</span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
-                  <span className="text-sm sm:text-base text-gray-700">과목별 학습데이터 정밀 분석</span>
+                  <span className="text-sm sm:text-base text-gray-700">AI 심층리포트 생성</span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
@@ -502,10 +502,6 @@ export default function Home() {
                 <li className="flex items-start">
                   <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
                   <span className="text-sm sm:text-base text-gray-700">학습 컨디션 및 난이도 기반 피드백</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
-                  <span className="text-sm sm:text-base text-gray-700">멘토 추천 {'>'} 추천된 멘토와의 연결 수수료</span>
                 </li>
               </ul>
               <motion.button 
@@ -541,7 +537,7 @@ export default function Home() {
                 </li>
                 <li className="flex items-start">
                   <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
-                  <span className="text-sm sm:text-base text-gray-700">자녀 학습 상태 기능</span>
+                  <span className="text-sm sm:text-base text-gray-700">자녀 학습 상태 확인 기능</span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
