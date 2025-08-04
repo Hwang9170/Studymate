@@ -537,7 +537,7 @@ export default function Home() {
                 </li>
                 <li className="flex items-start">
                   <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
-                  <span className="text-sm sm:text-base text-gray-700">자녀 학습 상태 확인 기능</span>
+                  <span className="text-sm sm:text-base text-gray-700">자녀 학습 상태 확인</span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
