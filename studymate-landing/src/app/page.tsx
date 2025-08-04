@@ -434,7 +434,8 @@ export default function Home() {
               학생과 학부모 모두를 위한 맞춤형 플랜을 제공합니다
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 max-w-6xl mx-auto">
+            {/* 무료 플랜 */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -442,26 +443,69 @@ export default function Home() {
               whileHover={{ scale: 1.02, y: -5 }}
               className="p-6 sm:p-8 border border-gray-200 rounded-xl hover:shadow-xl transition-all duration-300 bg-white"
             >
-              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">학생형</h3>
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">무료</h3>
+              <div className="text-3xl sm:text-4xl font-bold text-gray-600 mb-4 sm:mb-6">
+                ₩0<span className="text-base sm:text-lg text-gray-500">/월</span>
+              </div>
+              <ul className="space-y-2 sm:space-y-3 mb-6 sm:mb-8">
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
+                  <span className="text-sm sm:text-base text-gray-700">기본 AI 리포트 제공</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
+                  <span className="text-sm sm:text-base text-gray-700">일부 기능 제한</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
+                  <span className="text-sm sm:text-base text-gray-700">기본 학습 관리</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
+                  <span className="text-sm sm:text-base text-gray-700">커뮤니티 이용</span>
+                </li>
+              </ul>
+              <motion.button 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full py-3 sm:py-4 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors shadow-lg hover:shadow-xl font-semibold min-h-[48px]"
+              >
+                무료 시작
+              </motion.button>
+            </motion.div>
+
+            {/* 자녀형 플랜 */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              whileHover={{ scale: 1.02, y: -5 }}
+              className="p-6 sm:p-8 border border-gray-200 rounded-xl hover:shadow-xl transition-all duration-300 bg-white"
+            >
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">자녀형</h3>
               <div className="text-3xl sm:text-4xl font-bold text-blue-600 mb-4 sm:mb-6">
                 ₩49,000<span className="text-base sm:text-lg text-gray-500">/월</span>
               </div>
               <ul className="space-y-2 sm:space-y-3 mb-6 sm:mb-8">
-                <li className="flex items-center">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
-                  AI 분석 기반 주간 리포트
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
+                  <span className="text-sm sm:text-base text-gray-700">AI 심층리포트 생성</span>
                 </li>
-                <li className="flex items-center">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
-                  주 1회 확인 통화
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
+                  <span className="text-sm sm:text-base text-gray-700">과목별 학습데이터 정밀 분석</span>
                 </li>
-                <li className="flex items-center">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
-                  정성 피드백 제공
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
+                  <span className="text-sm sm:text-base text-gray-700">실시간 학습 가이드</span>
                 </li>
-                <li className="flex items-center">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
-                  학생 커뮤니티 이용
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
+                  <span className="text-sm sm:text-base text-gray-700">학습 컨디션 및 난이도 기반 피드백</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
+                  <span className="text-sm sm:text-base text-gray-700">멘토 추천 {'>'} 추천된 멘토와의 연결 수수료</span>
                 </li>
               </ul>
               <motion.button 
@@ -472,46 +516,48 @@ export default function Home() {
                 시작하기
               </motion.button>
             </motion.div>
+
+            {/* 자녀+학부모 통합형 플랜 - 부각 */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              whileHover={{ scale: 1.02, y: -5 }}
-              className="p-6 sm:p-8 border-2 border-blue-600 rounded-xl bg-gradient-to-br from-blue-50 to-purple-50 hover:shadow-xl transition-all duration-300 relative"
+              whileHover={{ scale: 1.05, y: -8 }}
+              className="p-6 sm:p-8 border-2 border-blue-600 rounded-xl bg-gradient-to-br from-blue-50 to-purple-50 hover:shadow-2xl transition-all duration-300 relative transform scale-105"
             >
-              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                <span className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 sm:px-4 py-1 rounded-full text-xs sm:text-sm font-semibold shadow-lg">
-                  인기
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <span className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 sm:px-5 py-2 rounded-full text-sm sm:text-base font-bold shadow-lg">
+                  베스트 선택
                 </span>
               </div>
-              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">학부모형</h3>
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">자녀+학부모 통합형</h3>
               <div className="text-3xl sm:text-4xl font-bold text-blue-600 mb-4 sm:mb-6">
                 ₩79,000<span className="text-base sm:text-lg text-gray-500">/월</span>
               </div>
               <ul className="space-y-2 sm:space-y-3 mb-6 sm:mb-8">
-                <li className="flex items-center">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
-                  학생형 모든 기능 포함
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
+                  <span className="text-sm sm:text-base text-gray-700 font-medium">자녀형 기능 <strong className="text-blue-600">모두 포함</strong></span>
                 </li>
-                <li className="flex items-center">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
-                  학부모 전용 채팅 피드백
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
+                  <span className="text-sm sm:text-base text-gray-700">자녀 학습 상태 기능</span>
                 </li>
-                <li className="flex items-center">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
-                  월간 종합 리포트
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
+                  <span className="text-sm sm:text-base text-gray-700">자녀 학습 지도 제안</span>
                 </li>
-                <li className="flex items-center">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
-                  학부모 커뮤니티 이용
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
+                  <span className="text-sm sm:text-base text-gray-700">일간/주간 분석 리포트 자동 수신</span>
                 </li>
               </ul>
               <motion.button 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-colors shadow-lg hover:shadow-xl"
+                className="w-full py-3 sm:py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-colors shadow-lg hover:shadow-xl font-bold text-lg"
               >
-                시작하기
+                지금 시작하기
               </motion.button>
             </motion.div>
           </div>
