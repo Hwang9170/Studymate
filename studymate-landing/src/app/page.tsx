@@ -101,6 +101,44 @@ export default function Home() {
     { number: "24/7", label: "AI 지원", icon: <Sparkles className="w-6 h-6" /> }
   ];
 
+  const storySteps = [
+    {
+      title: "Studymate – 모든 학생에게 인생을 바꾸는 친구를",
+      content:
+        "초등학교 3학년. 저는 대치동 학원가에서 캐리어 가방을 끌고 영어 학원으로 향했습니다. 중학교 때는 수학 경시대회 준비로 새벽까지 학원에 갇혀 공부했고, 고등학교 때는 내신과 수능을 위해 과목별 학원, 과외, 컨설팅까지 다녔습니다.",
+      color: "from-blue-500 to-purple-600",
+      icon: <Sparkles className="w-6 h-6" />,
+    },
+    {
+      title: "뜻밖의 결과",
+      content:
+        "15년 동안 저는 온갖 사교육을 경험했습니다. 하지만 결과는 뜻밖이었습니다. 첫 번째 대학 입시에서 실패했고, 두 번째와 세 번째 도전에서도 연달아 좌절했습니다.",
+      color: "from-indigo-500 to-sky-600",
+      icon: <X className="w-6 h-6" />,
+    },
+    {
+      title: "깨달음",
+      content:
+        "그때 비로소 깨달았습니다. 문제는 ‘정보’가 아니라, 나를 깊이 이해하고 방향성을 제시해줄 친구가 없었다는 것.",
+      color: "from-rose-500 to-orange-500",
+      icon: <Heart className="w-6 h-6" />,
+    },
+    {
+      title: "네 번째 도전",
+      content:
+        "네 번째 도전에서는 모든 걸 새로 시작했습니다. 계획을 직접 세우고, 나의 상태를 객관적으로 분석하며, 하루하루 점검했습니다. 그리고 마침내, 꿈꾸던 학교에 들어갔습니다.",
+      color: "from-emerald-500 to-teal-600",
+      icon: <CheckCircle className="w-6 h-6" />,
+    },
+    {
+      title: "모든 학생에게 그 ‘단 한 명’을",
+      content:
+        "이제 저는 그 ‘단 한 명’을 전국 모든 학생이 가질 수 있도록 만들고 싶습니다. Studymate는 AI를 통해 학생 한 명, 한 명의 상황과 목표에 맞춘 세상에서 가장 개인적인 학습 동반자가 됩니다. 지역도, 경제적 형편도, 환경도 더 이상 장벽이 되지 않는 세상. 모든 학생이 자신의 잠재력을 끝까지 펼칠 수 있는 세상.",
+      color: "from-fuchsia-500 to-pink-600",
+      icon: <Users className="w-6 h-6" />,
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       {/* Navigation */}
@@ -121,6 +159,9 @@ export default function Home() {
             
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
+              <Link href="#story" className="text-gray-600 hover:text-blue-600 transition-colors duration-300 hover:scale-105">
+                스토리
+              </Link>
               <Link href="#features" className="text-gray-600 hover:text-blue-600 transition-colors duration-300 hover:scale-105">
                 기능
               </Link>
@@ -190,6 +231,13 @@ export default function Home() {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 기능
+              </Link>
+              <Link 
+                href="#story" 
+                className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-colors rounded-lg mx-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                스토리
               </Link>
               <Link 
                 href="#benefits" 
@@ -307,6 +355,116 @@ export default function Home() {
                 <div className="text-sm sm:text-base text-gray-600">{stat.label}</div>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Story Section */}
+      <section id="story" className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(60%_60%_at_50%_10%,black,transparent)]">
+          <div className="absolute -top-24 left-1/3 size-[600px] bg-gradient-to-br from-blue-300/40 to-purple-300/40 blur-3xl" />
+          <div className="absolute -bottom-24 right-1/3 size-[600px] bg-gradient-to-tr from-fuchsia-300/40 to-blue-300/40 blur-3xl" />
+        </div>
+        <div className="relative max-w-7xl mx-auto">
+          <div className="text-center mb-12 sm:mb-16">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4"
+            >
+              한 사람의 이야기에서 시작된 변화
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-4"
+            >
+              아래 카드를 호버해 내용을 확인하세요
+            </motion.p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+            {/* Left: Narrative */}
+            <div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="bg-white/80 backdrop-blur rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-lg hover:shadow-xl transition-shadow"
+              >
+                <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-4">
+                  Studymate – 모든 학생에게 인생을 바꾸는 친구를
+                </h3>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  초등학교 3학년. 저는 대치동 학원가에서 캐리어 가방을 끌고 영어 학원으로 향했습니다. 중학교 때는 수학 경시대회 준비로 새벽까지 학원에 갇혀 공부했고, 고등학교 때는 내신과 수능을 위해 과목별 학원, 과외, 컨설팅까지 다녔습니다.
+                </p>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  15년 동안 저는 온갖 사교육을 경험했습니다. 하지만 결과는 뜻밖이었습니다. 첫 번째 대학 입시에서 실패했고, 두 번째와 세 번째 도전에서도 연달아 좌절했습니다.
+                </p>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  그때 비로소 깨달았습니다. 문제는 ‘정보’가 아니라, 나를 깊이 이해하고 방향성을 제시해줄 친구가 없었다는 것.
+                </p>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  네 번째 도전에서는 모든 걸 새로 시작했습니다. 계획을 직접 세우고, 나의 상태를 객관적으로 분석하며, 하루하루 점검했습니다. 그리고 마침내, 꿈꾸던 학교에 들어갔습니다.
+                </p>
+                <p className="text-gray-700 leading-relaxed">
+                  이제 저는 그 ‘단 한 명’을 전국 모든 학생이 가질 수 있도록 만들고 싶습니다. Studymate는 AI를 통해 학생 한 명, 한 명의 상황과 목표에 맞춘 세상에서 가장 개인적인 학습 동반자가 됩니다. 지역도, 경제적 형편도, 환경도 더 이상 장벽이 되지 않는 세상. 모든 학생이 자신의 잠재력을 끝까지 펼칠 수 있는 세상.
+                </p>
+              </motion.div>
+
+              <motion.blockquote
+                initial={{ opacity: 0, scale: 0.98 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="mt-6 sm:mt-8 relative"
+              >
+                <div className="p-[2px] rounded-2xl bg-gradient-to-r from-blue-600 via-purple-600 to-fuchsia-600">
+                  <div className="rounded-2xl bg-white p-6 sm:p-8">
+                    <p className="text-base sm:text-lg text-gray-900 font-semibold">
+                      “Studymate는 단순히 공부를 돕는 것이 아닙니다. 인생을 바꿉니다.”
+                    </p>
+                  </div>
+                </div>
+              </motion.blockquote>
+            </div>
+
+            {/* Right: Interactive Cards Timeline */}
+            <div className="space-y-4">
+              {storySteps.map((step, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.05 }}
+                  whileHover={{ y: -4, scale: 1.01 }}
+                  className="relative group"
+                >
+                  <div className="absolute left-5 top-0 bottom-0 w-px bg-gradient-to-b from-gray-200 to-transparent hidden sm:block" />
+                  <div className="flex items-start gap-4">
+                    <div className={`shrink-0 w-10 h-10 rounded-xl text-white flex items-center justify-center shadow-lg bg-gradient-to-r ${step.color}`}>
+                      {step.icon}
+                    </div>
+                    <div className="flex-1">
+                      <div className="rounded-2xl border border-gray-100 bg-white/90 backdrop-blur p-5 shadow-sm group-hover:shadow-lg transition-all">
+                        <h4 className="text-base sm:text-lg font-semibold text-gray-900 mb-1">
+                          {index + 1}. {step.title}
+                        </h4>
+                        <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                          {step.content}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
